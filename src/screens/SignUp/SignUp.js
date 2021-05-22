@@ -125,6 +125,9 @@ const useStyles = makeStyles((theme) => ({
       },
     },
   },
+  loginTitle: {
+    marginBottom: 20,
+  },
 }));
 
 const SignUpPage = () => {
@@ -256,6 +259,9 @@ const SignUpPage = () => {
         <div className={classes.content}>
           <Paper className={classes.body}>
             <Grid>
+              <Typography variant="h5" className={classes.loginTitle}>
+                User Sign Up
+              </Typography>
               <Typography variant="subtitle1">Your Email</Typography>
               <TextField
                 name="email"
@@ -322,7 +328,7 @@ const SignUpPage = () => {
                   className={classes.button}
                   variant="contained"
                   // onClick={() => setVerifySignup(true)}
-                  onClick={() => history.push(Routes.home)}
+                  onClick={() => history.push(Routes.signIn)}
                   fullWidth
                 >
                   SIGN UP
@@ -330,7 +336,7 @@ const SignUpPage = () => {
               </Grid>
               <Typography variant="subtitle2" className={classes.logIn}>
                 Already have an account?{" "}
-                <Link className={classes.link} to="/login">
+                <Link className={classes.link} to="/signIn">
                   Sign In
                 </Link>
               </Typography>

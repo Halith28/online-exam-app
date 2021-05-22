@@ -10,5 +10,6 @@ export const Routes = {
   //Auth routes
   home: "/",
   signUp: "/signUp",
+  signIn: "/signIn",
   results: "/results",
 };

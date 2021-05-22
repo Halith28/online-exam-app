@@ -114,7 +114,7 @@ const ResultPage = () => {
               <Button
                 variant="outlined"
                 className={classes.button}
-                onClick={() => history.push(Routes.signUp)}
+                onClick={() => history.push(Routes.signIn)}
               >
                 Exit
               </Button>

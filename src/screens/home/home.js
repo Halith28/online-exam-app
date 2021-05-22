@@ -71,7 +71,7 @@ const HomePage = () => {
         <Grid container className={classes.root}>
           <Grid item xs={12} className={classes.timer}>
             {/* <Typography>04:59</Typography> */}
-            <CountDown hours={0} minutes={5} seconds={10} />
+            <CountDown hours={0} minutes={0} seconds={10} />
           </Grid>
           <Grid
             container
