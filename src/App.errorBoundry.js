@@ -1,9 +1,9 @@
 /**
- * @author Kameshwaran Murugan
- * @email kamesh@qdmplatforms.com
+ * @author Abdul halith
+ * @email abd.halith994@gmail.com
  * @create date 2020-11-27
  * @modify date 2020-12-01
- * @desc If any error/crash happend in the app, those are cached here and 500 page is shown, if 
+ * @desc If any error/crash happend in the app, those are cached here and 500 page is shown, if
  * need the error will be send to server.
  */
 
@@ -24,9 +24,9 @@ class AppErrorBoundary extends React.Component {
   }
 
   componentDidCatch(error, info) {
-    console.log('info:', info)
-    console.log('error:', error)
-    
+    console.log("info:", info);
+    console.log("error:", error);
+
     // Display fallback UI
     this.setState({ hasError: true });
     // You can also log the error to an error reporting service

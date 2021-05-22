@@ -1,6 +1,6 @@
 /**
- * @author Kameshwaran Murugan
- * @email kamesh@qdmplatforms.com
+ * @author Abdul halith
+ * @email abd.halith994@gmail.com
  * @create date 2020-11-27
  * @modify date 2021-01-29
  * @desc Providing the DialogContext from /src/context which is used in /src/App.js
@@ -16,11 +16,9 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import Button from "@material-ui/core/Button";
 import { withStyles } from "@material-ui/core";
 
-
-const styles= (theme) =>({
-dialog:{minWidth:600}
-})
-
+const styles = (theme) => ({
+  dialog: { minWidth: 600 },
+});
 
 class AppDialog extends React.Component {
   constructor(props) {
@@ -31,7 +29,7 @@ class AppDialog extends React.Component {
       body: "",
       positiveBtn: "Ok",
       negativeBtn: "Cancel",
-      negativeBtnDontShow:false,
+      negativeBtnDontShow: false,
       onOk: () => null,
       onCancel: this.close,
     };
@@ -40,9 +38,9 @@ class AppDialog extends React.Component {
   close = () => {
     this.setState({
       open: false,
-      
+
       // THIS PART IS COMMENTED ON A CAUSE
-      
+
       // title: "",
       // body: "",
       // positiveBtn: "Ok",
@@ -55,7 +53,7 @@ class AppDialog extends React.Component {
   };
 
   render() {
-    const {classes} = this.props
+    const { classes } = this.props;
     return (
       <DialogContext.Provider
         value={{
@@ -69,11 +67,9 @@ class AppDialog extends React.Component {
           onClose={this.state.onCancel}
           aria-labelledby="alert-dialog-title"
           aria-describedby="alert-dialog-description"
-          classes={
-            {
-              paper:classes.dialog
-            }
-          }
+          classes={{
+            paper: classes.dialog,
+          }}
         >
           <DialogTitle id="alert-dialog-title">{this.state.title}</DialogTitle>
           <DialogContent>
@@ -82,10 +78,11 @@ class AppDialog extends React.Component {
             </DialogContentText>
           </DialogContent>
           <DialogActions>
-            {!Boolean(this.state?.negativeBtnDontShow) &&
+            {!Boolean(this.state?.negativeBtnDontShow) && (
               <Button onClick={this.state.onCancel} color="primary">
-              {this.state.negativeBtn}
-            </Button>}
+                {this.state.negativeBtn}
+              </Button>
+            )}
             <Button onClick={this.state.onOk} color="primary" autoFocus>
               {this.state.positiveBtn}
             </Button>

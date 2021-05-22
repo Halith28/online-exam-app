@@ -1,6 +1,6 @@
 /**
- * @author Kameshwaran Murugan
- * @email kamesh@qdmplatforms.com
+ * @author Abdul halith
+ * @email abd.halith994@gmail.com
  * @create date 2020-11-27
  * @modify date 2021-01-29
  * @desc Providing the AuthContext from /src/context which is used in the /src/App.js.
@@ -19,29 +19,29 @@ class AppAuth extends React.Component {
 
   componentDidMount() {
     NetworkCall(
-      `${window.location.protocol}//${window.location.hostname}${window.location.port ? ":" + window.location.port : ''}/meta.json`,
+      `${window.location.protocol}//${window.location.hostname}${
+        window.location.port ? ":" + window.location.port : ""
+      }/meta.json`,
       NetWorkCallMethods.get,
       null,
       null,
       false,
-      true).then((_) => {
-        localStorage.setItem(LocalStorageKeys.version, _.data.version)
-      }).catch(err => {
-        console.log('err:', err);
+      true
+    )
+      .then((_) => {
+        localStorage.setItem(LocalStorageKeys.version, _.data.version);
       })
+      .catch((err) => {
+        console.log("err:", err);
+      });
   }
 
   render() {
-
-    let {
-      loading
-    } = this.props;
+    let { loading } = this.props;
 
     return (
       <>
-        {loading && (
-          <LinearProgress />
-        )}
+        {loading && <LinearProgress />}
         {this.props.children}
       </>
     );

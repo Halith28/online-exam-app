@@ -1,6 +1,6 @@
 /**
- * @author Kameshwaran Murugan
- * @email kamesh@qdmplatforms.com
+ * @author Abdul halith
+ * @email abd.halith994@gmail.com
  * @create date 2020-12-01
  * @modify date 2021-02-03
  * @desc Material UI MuIAlert and Snackbar is used to show the temporary message Component
@@ -12,7 +12,7 @@ import MuiAlert from "@material-ui/lab/Alert";
 //MuiAlert component which is shown inside the Snackbar component
 let Alert = (props) => {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
-}
+};
 
 export const Alerts = (props) => {
   const [open, setOpen] = React.useState(props.open);
@@ -39,6 +39,6 @@ export const Alerts = (props) => {
       <Alert id="main_alert" severity={props.severity} onClose={handleClose}>
         {props.msg}
       </Alert>
-    </Snackbar> 
+    </Snackbar>
   );
 };

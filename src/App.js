@@ -1,9 +1,9 @@
 /**
- * @author Kameshwaran Murugan
- * @email kamesh@qdmplatforms.com
+ * @author Abdul halith
+ * @email abd.halith994@gmail.com
  * @create date 2020-11-27
  * @modify date 2021-02-03
- * @desc The first component of the application, all the required context and routes are used here 
+ * @desc The first component of the application, all the required context and routes are used here
  * to setup the application.
  */
 

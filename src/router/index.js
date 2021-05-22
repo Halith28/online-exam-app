@@ -1,6 +1,6 @@
 /**
- * @author Kameshwaran Murugan
- * @email kamesh@qdmplatforms.com
+ * @author Abdul halith
+ * @email abd.halith994@gmail.com
  * @create date 2020-11-27
  * @modify date 2021-02-03
  * @desc Different routes and their corresponding component are defined here.
@@ -15,19 +15,18 @@ import {
 } from "react-router-dom";
 import { Routes } from "./routes";
 
-import {
-  NotFound,
-  
-} from './../screens';
+import { Home, NotFound, Results, SignUp } from "./../screens";
 
 const RouterApp = (props) => {
-
   return (
     <Router>
       <Switch>
         {/* form component list */}
-        <Route exact path={Routes.home} component={NotFound} />
-        
+        <Route exact path={Routes.home} component={Home} />
+        {/* Results Page */}
+        <Route exact path={Routes.results} component={Results} />
+        {/* Signup Page */}
+        <Route exact path={Routes.signUp} component={SignUp} />
 
         {/* For unknow/non-defined path */}
         <Route path="*" component={NotFound} />

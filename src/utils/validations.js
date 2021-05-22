@@ -1,6 +1,6 @@
 /**
- * @author Kameshwaran Murugan
- * @email kamesh@qdmplatforms.com
+ * @author Abdul halith
+ * @email abd.halith994@gmail.com
  * @create date 2020-11-27
  * @modify date 2020-12-01
  * @desc Collection of all validation function
@@ -8,11 +8,12 @@
 
 //Function to validate email
 export let ValidateEmail = (email) => {
-  let re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  let re =
+    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   return Boolean(re.test(email));
 };
 
-//Function to check wheather the 'e' is number key event or not based on 'isNumber' key 
+//Function to check wheather the 'e' is number key event or not based on 'isNumber' key
 export let IsNumberKey = (e, isNumber) => {
   if (isNumber) {
     if (e.target.value.length <= 10) {
@@ -33,11 +34,17 @@ export let IsNumberKeyDown = (e, isNumber) => {
 //Function to check wheather the 'e' is text key event or not.
 export let IsTextKeyDown = (event, isOnlyText) => {
   var inputValue = event.which;
-  
-  if(isOnlyText){
-    if (!((inputValue >= 65 && inputValue <= 90)||(inputValue >= 97 && inputValue <= 122)) && inputValue !== 32 && inputValue !== 0) {
+
+  if (isOnlyText) {
+    if (
+      !(
+        (inputValue >= 65 && inputValue <= 90) ||
+        (inputValue >= 97 && inputValue <= 122)
+      ) &&
+      inputValue !== 32 &&
+      inputValue !== 0
+    ) {
       event.preventDefault();
     }
   }
-
 };

@@ -1,7 +1,7 @@
 /**
- * @author Kameshwaran Murugan
- * @email kamesh@qdmplatforms.com
- * @create date 2020-11-27 
+ * @author Abdul halith
+ * @email abd.halith994@gmail.com
+ * @create date 2020-11-27
  * @modify date 2021-01-29
  * @desc Collection of all the Context used in the application
  */
@@ -10,8 +10,8 @@ import React from "react";
 import { Themes, AlertProps, DrawerProps } from "../utils";
 
 /**
- * ThemeContext store the current theme of the app,which is provided 
- * at the /src/App.js using the /src/App.theme.js. 
+ * ThemeContext store the current theme of the app,which is provided
+ * at the /src/App.js using the /src/App.theme.js.
  */
 export let ThemeContext = React.createContext({
   name: Themes.default,
@@ -20,7 +20,7 @@ export let ThemeContext = React.createContext({
 
 /**
  * AuthContext store some basic detail of the user when the user logged
- * into the application, which is provided at the /src/App.js using 
+ * into the application, which is provided at the /src/App.js using
  * the /src/App.auth.js.
  */
 export let AuthContext = React.createContext({
@@ -29,7 +29,7 @@ export let AuthContext = React.createContext({
 });
 
 /**
- * AlertContext store the props which are neccessary to show the Alert component, 
+ * AlertContext store the props which are neccessary to show the Alert component,
  * which is provided at the /src/App.js using the /src/App.alert.js.
  */
 export let AlertContext = React.createContext({
@@ -43,7 +43,7 @@ export let AlertContext = React.createContext({
 });
 
 /**
- * DialogContext store the props of a Dialog, which is provided at the /src/App.js using 
+ * DialogContext store the props of a Dialog, which is provided at the /src/App.js using
  * the /src/App.dialog.js
  */
 export let DialogContext = React.createContext({
@@ -57,17 +57,17 @@ export let DialogContext = React.createContext({
 });
 
 /**
- * BackdropContext store the props of the Backdrop Component, which is provided at the /src/App.js using 
+ * BackdropContext store the props of the Backdrop Component, which is provided at the /src/App.js using
  * the /src/App.backdrop.js
  */
 export let BackdropContext = React.createContext({
   open: true,
   message: "",
-  setBackDrop: () => null
-})
+  setBackDrop: () => null,
+});
 
 /**
- * DrawerContext store the props of the Drawer component, which is provided at the /src/App.js using 
+ * DrawerContext store the props of the Drawer component, which is provided at the /src/App.js using
  * the /src/App.drawer.js
  */
 export const DrawerContext = React.createContext({
@@ -75,5 +75,5 @@ export const DrawerContext = React.createContext({
   direction: DrawerProps.direction.right,
   variant: DrawerProps.variant.temporary,
   onClose: () => null,
-  setDrawer: ()=> null
-})
+  setDrawer: () => null,
+});
