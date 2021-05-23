@@ -8,7 +8,10 @@ import {
   Checkbox,
   FormControlLabel,
   FormGroup,
-  ButtonGroup,
+  Radio,
+  RadioGroup,
+  FormControl,
+  FormLabel,
   Button,
 } from "@material-ui/core";
 import MainScreenComp from "../../components/mainScreenComp";
@@ -16,6 +19,7 @@ import DataJson from "../../assets/sampleData.json";
 import { Routes } from "../../router/routes";
 import { useHistory } from "react-router";
 import CountDown from "../../components/countDownTimer";
+import { LocalStorageKeys } from "../../utils/constants";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -42,16 +46,30 @@ const HomePage = () => {
   const classes = useStyles();
   const history = useHistory();
   const [Index, setIndex] = useState(0);
+  const [value, setValue] = React.useState(0);
   const questionLimit = 5;
+  const [state, setState] = useState({
+    results: [],
+    checked: {
+      radio_0: 9258,
+    },
+    notes: "",
+  });
   const sortedArray = DataJson.filter(
     (val, index) => val.category === "physics"
   );
+  const [time, getTime] = useState();
 
   const gotoNextQuestion = () => {
     if (Index < 4) {
       setIndex(Index + 1);
     } else {
-      history.push(Routes?.results);
+      history.push({
+        pathname: Routes?.results,
+        results: state?.results,
+        notes: state?.notes,
+        timeTaken: time,
+      });
     }
   };
 
@@ -59,19 +77,52 @@ const HomePage = () => {
     if (Index > 0) {
       setIndex(Index - 1);
     } else {
-      history.push(Routes?.signUp);
+      setTimeout(() => {
+        localStorage.clear();
+        // localStorage.removeItem(LocalStorageKeys.authToken);
+        history.push(Routes?.signIn);
+      }, 1000);
+    }
+  };
+
+  const handleChange = (e, index) => {
+    debugger;
+    setValue(parseInt(e.target.value));
+    var value = sortedArray[index]?.correct_option === parseInt(e.target.value);
+    setState((prevState) => ({
+      ...prevState,
+      ...(prevState.results[index] = value),
+      checked: {
+        ...prevState.checked,
+        [e.target.name]: parseInt(e.target.value),
+      },
+    }));
+    if (e.target.name === "notes") {
+      setState((prevState) => ({
+        ...prevState,
+        notes: e.target.value,
+      }));
     }
   };
 
   console.log(sortedArray);
   console.log(DataJson);
+  console.log(state);
+  console.log(time);
+  //   console.log(state.checked["checkbox_1"][0]);
   return (
     <Grid>
       <MainScreenComp>
         <Grid container className={classes.root}>
           <Grid item xs={12} className={classes.timer}>
             {/* <Typography>04:59</Typography> */}
-            <CountDown hours={0} minutes={0} seconds={10} />
+            <CountDown
+              hours={0}
+              minutes={5}
+              seconds={0}
+              data={state}
+              getTime={getTime}
+            />
           </Grid>
           <Grid
             container
@@ -87,22 +138,39 @@ const HomePage = () => {
               <Typography variant="h6">
                 {sortedArray[Index]?.question}
               </Typography>
-              <FormGroup column>
+              {/* <FormGroup column>
                 {sortedArray[Index]?.options.map((item, index) => (
                   <FormControlLabel
                     key={index}
                     control={
                       <Checkbox
-                        // checked={state.checkedB}
-                        // onChange={handleChange}
-                        name="checkedB"
+                        // checked={state?.checked["checkbox_0"][index]}
+                        onChange={(e) => handleChange(e, item?.id, Index)}
+                        name={`checkbox_${Index}`}
                         color="primary"
                       />
                     }
                     label={item?.value}
                   />
                 ))}
-              </FormGroup>
+              </FormGroup> */}
+              <FormControl component="fieldset">
+                <RadioGroup
+                  aria-label="options"
+                  name={`radio_${Index}`}
+                  value={state?.checked[`radio_${Index}`] ?? 0}
+                  onChange={(e) => handleChange(e, Index)}
+                >
+                  {sortedArray[Index]?.options.map((item, index) => (
+                    <FormControlLabel
+                      value={item?.id}
+                      control={<Radio />}
+                      label={item?.value}
+                    />
+                  ))}
+                </RadioGroup>
+                {/* <FormLabel component="legend">Gender</FormLabel> */}
+              </FormControl>
               <Grid className={classes.buttonGrid}>
                 <Button
                   variant="outlined"
@@ -127,7 +195,15 @@ const HomePage = () => {
                   <Typography>NotePad</Typography>
                 </Grid>
                 <Divider />
-                <TextField variant="outlined" multiline rows={13} fullWidth />
+                <TextField
+                  name="notes"
+                  value={state?.notes}
+                  variant="outlined"
+                  onChange={handleChange}
+                  multiline
+                  rows={13}
+                  fullWidth
+                />
               </div>
             </Grid>
           </Grid>

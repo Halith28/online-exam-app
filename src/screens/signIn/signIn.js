@@ -8,6 +8,12 @@ import {
   TextField,
   Typography,
   Paper,
+  MenuItem,
+  InputLabel,
+  FormLabel,
+  Select,
+  FormHelperText,
+  FormControl,
 } from "@material-ui/core";
 import { LocalStorageKeys } from "../../utils/constants";
 import Visibility from "@material-ui/icons/Visibility";
@@ -88,6 +94,7 @@ const SignInPage = () => {
   const [state, setState] = useState({
     email: "",
     password: "",
+    examCategory: "",
     isLoggingIn: false,
     error: {},
   });
@@ -117,7 +124,7 @@ const SignInPage = () => {
         password: state?.password?.length === 0 ? true : false,
       };
       setState({ ...state });
-      return true;
+      return false;
     } else if (state?.email.length > 0 || state?.password?.length > 0) {
       state.error = {
         ...state.error,
@@ -134,64 +141,74 @@ const SignInPage = () => {
         email: false,
         password: false,
       };
+      return true;
     }
   };
 
+  console.log(state?.email?.length);
+
   const submitForm = () => {
+    debugger;
     const params = {
       email: state.email,
       password: state.password,
     };
     if (validation()) {
-      if (!state?.error?.email && !state?.error?.password) {
-        axios
-          .post(`https://dev.prodkt.co/backend/Keycloak/Signin`, params)
-          .then((res) => {
-            debugger;
-            if (res.status === 200) {
-              state.email = "";
-              state.password = "";
-              state.isLoggingIn = true;
-              setTimeout(() => {
-                localStorage.setItem(LocalStorageKeys.authToken, "token");
-                localStorage.setItem(
-                  "BusinessProfileID",
-                  res?.data?.userdetails?.ID
-                );
-                localStorage.setItem(
-                  "BusinessPartnerID",
-                  res?.data?.userdetails?.BusinessPartnerID
-                );
-                // history.push("/home");
-                if (history?.location?.state?.from?.pathname) {
-                  history.push(history.location.state.from.pathname);
-                } else {
-                  history.push(Routes.home);
-                }
-              }, 1000);
-              setState({ ...state });
-            } else {
-              alert.setSnack({
-                ...alert,
-                open: true,
-                severity: AlertProps.severity.error,
-                msg: "Please fill the required fields",
-                vertical: AlertProps.vertical.top,
-                horizontal: AlertProps.horizontal.center,
-              });
-            }
-          })
-          .catch((error) => {
-            console.log({ error });
-            alert.setSnack({
-              ...alert,
-              open: true,
-              severity: AlertProps.severity.error,
-              msg: "Invalid Email or Password",
-              vertical: AlertProps.vertical.top,
-              horizontal: AlertProps.horizontal.center,
-            });
-          });
+      //   if (!state?.error?.email && !state?.error?.password) {
+      //     axios
+      //       .post(`https://dev.prodkt.co/backend/Keycloak/Signin`, params)
+      //       .then((res) => {
+      //         debugger;
+      //         if (res.status === 200) {
+      //           state.email = "";
+      //           state.password = "";
+      //           state.isLoggingIn = true;
+      //           setTimeout(() => {
+      //             localStorage.setItem(LocalStorageKeys.authToken, "token");
+      //             localStorage.setItem(
+      //               "BusinessProfileID",
+      //               res?.data?.userdetails?.ID
+      //             );
+      //             localStorage.setItem(
+      //               "BusinessPartnerID",
+      //               res?.data?.userdetails?.BusinessPartnerID
+      //             );
+      //             // history.push("/home");
+      //             if (history?.location?.state?.from?.pathname) {
+      //               history.push(history.location.state.from.pathname);
+      //             } else {
+      //               history.push(Routes.home);
+      //             }
+      //           }, 1000);
+      //           setState({ ...state });
+      //         } else {
+      //           alert.setSnack({
+      //             ...alert,
+      //             open: true,
+      //             severity: AlertProps.severity.error,
+      //             msg: "Please fill the required fields",
+      //             vertical: AlertProps.vertical.top,
+      //             horizontal: AlertProps.horizontal.center,
+      //           });
+      //         }
+      //       })
+      //       .catch((error) => {
+      //         console.log({ error });
+      //         alert.setSnack({
+      //           ...alert,
+      //           open: true,
+      //           severity: AlertProps.severity.error,
+      //           msg: "Invalid Email or Password",
+      //           vertical: AlertProps.vertical.top,
+      //           horizontal: AlertProps.horizontal.center,
+      //         });
+      //       });
+      //   }
+      if (history?.location?.state?.from?.pathname) {
+        history.push(history.location.state.from.pathname);
+      } else {
+        history.push(Routes.home);
+        localStorage.setItem("ExamCategory", state?.examCategory);
       }
     }
   };
@@ -199,26 +216,28 @@ const SignInPage = () => {
   const handleChange1 = (event) => {
     setState({
       ...state,
-      email: event.target.value,
-      error: { ...state.error, email: false },
+      [event.target.name]: event.target.value,
+      error: { ...state.error, [event.target.name]: false },
     });
   };
 
-  const handleChange2 = (event) => {
-    setState({
-      ...state,
-      password: event.target.value,
-      error: { ...state.error, password: false },
-    });
-  };
+  //   const handleChange2 = (event) => {
+  //     setState({
+  //       ...state,
+  //       password: event.target.value,
+  //       error: { ...state.error, password: false },
+  //     });
+  //   };
 
-  //   useEffect(() => {
-  //     if (localStorage.getItem(LocalStorageKeys.authToken)) {
-  //       history.push(Routes.home);
-  //     } else {
-  //       history.push(Routes.signIn);
-  //     }
-  //   }, [history]);
+  useEffect(() => {
+    if (localStorage.getItem(LocalStorageKeys.authToken)) {
+      history.push(Routes.home);
+    } else {
+      history.push(Routes.signIn);
+    }
+  }, [history]);
+
+  console.log(state);
 
   return (
     <Grid container direction="row" className={classes.root}>
@@ -241,6 +260,7 @@ const SignInPage = () => {
             </Typography>
             <Typography variant="subtitle1">Your Email</Typography>
             <TextField
+              name="email"
               variant="standard"
               color="primary"
               fullWidth
@@ -261,10 +281,11 @@ const SignInPage = () => {
             />
             <Typography variant="subtitle1">Password</Typography>
             <TextField
+              name="password"
               variant="standard"
               fullWidth
               placeholder="Password"
-              onChange={handleChange2}
+              onChange={handleChange1}
               type={showPassword ? "text" : "password"}
               error={state?.error?.password ?? false}
               helperText={
@@ -292,26 +313,36 @@ const SignInPage = () => {
                 ),
               }}
             />
+
             <Typography variant="subtitle1">Exam Category</Typography>
-            <TextField
+            <FormControl
+              name="examCategory"
+              value={state?.examCategory}
               variant="standard"
-              color="primary"
+              className={classes.formControl}
+              error={state?.error?.insurance}
               fullWidth
-              placeholder="Select your exam category"
-              onChange={handleChange1}
-              error={state?.error?.email ?? false}
-              helperText={
-                state?.error?.email && (
-                  <Typography
-                    component={"span"}
-                    variant="subtitle2"
-                    style={{ color: "red" }}
-                  >
-                    Enter the valid email address
-                  </Typography>
-                )
-              }
-            />
+            >
+              {/* <InputLabel id="demo-simple-select-outlined-label">
+                Exam Category
+              </InputLabel> */}
+              <Select
+                name="examCategory"
+                value={state?.insurance}
+                onChange={handleChange1}
+                inputProps={{ "aria-label": "Without label" }}
+              >
+                <MenuItem value="">
+                  <em>None</em>
+                </MenuItem>
+                <MenuItem value={"physics"}>Physics</MenuItem>
+                <MenuItem value={"chemistry"}>Chemistry</MenuItem>
+                <MenuItem value={"science"}>Science</MenuItem>
+              </Select>
+              {state?.error?.insurance && (
+                <FormHelperText>This is required!</FormHelperText>
+              )}
+            </FormControl>
             <Typography variant="subtitle2">
               <Link className={classes.link} to="/resetPassword">
                 Reset/Forgot your password?
@@ -321,8 +352,8 @@ const SignInPage = () => {
               <Button
                 className={classes.button}
                 variant="contained"
-                // onClick={() => submitForm()}
-                onClick={() => history.push(Routes.home)}
+                onClick={() => submitForm()}
+                // onClick={() => history.push(Routes.home)}
                 fullWidth
               >
                 {`${state.isLoggingIn ? "Logging In..." : "Log In"}`}

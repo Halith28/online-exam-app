@@ -14,6 +14,7 @@ import TwitterIcon from "@material-ui/icons/Twitter";
 import YouTubeIcon from "@material-ui/icons/YouTube";
 import InstagramIcon from "@material-ui/icons/Instagram";
 import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
+import logo from "../../assets/Frame1681.png";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -60,10 +61,21 @@ const MainScreenComp = (props) => {
       <div className={classes.root}>
         <AppBar position="static" className={classes.appBar}>
           <Toolbar classname={classes.toolBar}>
-            <Typography variant="h6" className={classes.title}>
-              Clinical Scholar
-            </Typography>
-            <Typography variant="h6" className={classes.title}>
+            <img src={logo} alt="logo" height="50px" width="40px" />
+            <div>
+              <Typography variant="h6" className={classes.title}>
+                Clinical
+              </Typography>
+              <Typography variant="h4" className={classes.title}>
+                Scholar
+              </Typography>
+            </div>
+            <Typography
+              variant="h6"
+              className={classes.title}
+              align="center"
+              style={{ textTransform: "uppercase" }}
+            >
               Exam Category : Physics
             </Typography>
             <IconButton
@@ -89,8 +101,17 @@ const MainScreenComp = (props) => {
       <Card className={classes.footer}>
         <Grid container>
           <Grid item xs={6}>
-            <img src={Vector} alt="vector" />
-            Allah
+            <div style={{ marginLeft: 20, display: "flex", padding: 10 }}>
+              <img src={logo} alt="logo" height="50px" width="40px" />
+              <div>
+                <Typography variant="h6" className={classes.title}>
+                  Clinical
+                </Typography>
+                <Typography variant="h4" className={classes.title}>
+                  Scholar
+                </Typography>
+              </div>
+            </div>
           </Grid>
           <Grid item xs={6} className={classes.marketing}>
             <Avatar className={classes.icons}>

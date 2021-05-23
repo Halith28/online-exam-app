@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import MainScreenComp from "../../components/mainScreenComp";
@@ -49,30 +49,49 @@ const useStyles = makeStyles((theme) => ({
 const ResultPage = () => {
   const classes = useStyles();
   const history = useHistory();
+  const results = history?.location?.results;
+  const [correct, setCorrect] = useState(0);
+  const [incorrect, setInCorrect] = useState(0);
+  const [score, setScore] = useState(0);
+  const [skipped, setSkipped] = useState(0);
+  const [h, m, s] = history?.location?.timeTaken;
+
+  useEffect(() => {
+    var value = results?.filter((val) => val === true).length;
+    setScore(value * 2);
+    setSkipped(((5 - results?.length) / 5) * 100);
+    setInCorrect(((results?.length - value) / results?.length) * 100);
+    setCorrect(100 - ((5 - value) / 5) * 100);
+    console.log((results?.length - value) / results?.length);
+  }, []);
+  console.log(score);
+  console.log(history?.location?.timeTaken);
+
   return (
     <>
       <MainScreenComp>
         <div className={classes.body}>
           <Grid container className={classes.resultContent}>
             <Grid item xs={2}>
-              <Typography>Score</Typography>
-              <Typography>Time Taken:</Typography>
-              <Typography variant="h4">80%</Typography>
+              <Typography>
+                Score : <b>{score} / 10</b>
+              </Typography>
+              <Typography>
+                Time Taken:{" "}
+                <b>
+                  {`${(5 - m).toString().padStart(2, "0")}:${(60 - s)
+                    .toString()
+                    .padStart(2, "0")}`}
+                </b>
+              </Typography>
+              <Typography variant="h4">{(score / 10) * 100}%</Typography>
               <Typography variant="h6">Total Score</Typography>
             </Grid>
             <Grid item xs={10}>
               <Grid container justify="space-between">
                 <Grid item>
                   <div style={{ width: 120, height: 120 }}>
-                    <CircularProgressbar value={80} text={"80%"} />
-                  </div>
-                  <Typography className={classes.percentTitle}>
-                    Final Score
-                  </Typography>
-                </Grid>
-                <Grid item>
-                  <div style={{ width: 120, height: 120 }}>
-                    <CircularProgressbar value={66} text={"66%"} />
+                    <CircularProgressbar value={correct} text={correct + "%"} />
                   </div>
                   <Typography className={classes.percentTitle}>
                     Correct
@@ -81,8 +100,8 @@ const ResultPage = () => {
                 <Grid item>
                   <div style={{ width: 120, height: 120 }}>
                     <CircularProgressbar
-                      value={34}
-                      text={"34%"}
+                      value={incorrect}
+                      text={incorrect + "%"}
                       backgroundColor="red"
                     />
                   </div>
@@ -92,7 +111,18 @@ const ResultPage = () => {
                 </Grid>
                 <Grid item>
                   <div style={{ width: 120, height: 120 }}>
-                    <CircularProgressbar value={20} text={"20%"} />
+                    <CircularProgressbar
+                      value={100 - skipped}
+                      text={100 - skipped + "%"}
+                    />
+                  </div>
+                  <Typography className={classes.percentTitle}>
+                    Attempted
+                  </Typography>
+                </Grid>
+                <Grid item>
+                  <div style={{ width: 120, height: 120 }}>
+                    <CircularProgressbar value={skipped} text={skipped + "%"} />
                   </div>
                   <Typography className={classes.percentTitle}>
                     Skipped
@@ -104,10 +134,11 @@ const ResultPage = () => {
             <Grid item xs={12} className={classes.scribbleGrid}>
               <Typography variant="h6">Your Scribble Notes:</Typography>
               <Typography>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi
-                nisl vitae purus facilisi id. Blandit sagittis commodo, urna ut
-                mattis vestibulum non. Vel sed scelerisque leo quis in mattis
-                ultrices aliquam. Justo,Lorem ivp{" "}
+                {history?.location?.notes ? (
+                  history?.location?.notes
+                ) : (
+                  <span style={{ opacity: 0.5 }}>No Records found</span>
+                )}
               </Typography>
             </Grid>
             <Grid item xs={12} className={classes.buttonGrid}>

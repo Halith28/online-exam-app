@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router";
 import { Routes } from "../../router/routes";
 
-const CountDown = ({ hours = 0, minutes = 0, seconds = 0 }) => {
+const CountDown = ({ hours = 0, minutes = 0, seconds = 0, data, getTime }) => {
   const [paused, setPaused] = React.useState(false);
   const [over, setOver] = React.useState(false);
   const [[h, m, s], setTime] = React.useState([hours, minutes, seconds]);
@@ -12,7 +12,12 @@ const CountDown = ({ hours = 0, minutes = 0, seconds = 0 }) => {
     if (paused || over) return;
     if (h === 0 && m === 0 && s === 0) {
       setOver(true);
-      history.push(Routes?.signUp);
+      history.push({
+        pathname: Routes?.results,
+        results: data?.results,
+        notes: data?.notes,
+      });
+      //   history.push(Routes?.results);
     } else if (m === 0 && s === 0) {
       setTime([h - 1, 59, 59]);
     } else if (s == 0) {
@@ -32,6 +37,10 @@ const CountDown = ({ hours = 0, minutes = 0, seconds = 0 }) => {
     const timerID = setInterval(() => tick(), 1000);
     return () => clearInterval(timerID);
   });
+
+  useEffect(() => {
+    getTime([h, m, s]);
+  }, [h, m, s]);
 
   return (
     <div>
