@@ -5,13 +5,10 @@ import {
   makeStyles,
   TextField,
   Typography,
-  Checkbox,
   FormControlLabel,
-  FormGroup,
   Radio,
   RadioGroup,
   FormControl,
-  FormLabel,
   Button,
 } from "@material-ui/core";
 import MainScreenComp from "../../components/mainScreenComp";
@@ -19,7 +16,6 @@ import DataJson from "../../assets/sampleData.json";
 import { Routes } from "../../router/routes";
 import { useHistory } from "react-router";
 import CountDown from "../../components/countDownTimer";
-import { LocalStorageKeys } from "../../utils/constants";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -46,7 +42,6 @@ const HomePage = () => {
   const classes = useStyles();
   const history = useHistory();
   const [Index, setIndex] = useState(0);
-  const [value, setValue] = React.useState(0);
   const questionLimit = 5;
   const [state, setState] = useState({
     results: [],
@@ -87,7 +82,6 @@ const HomePage = () => {
 
   const handleChange = (e, index) => {
     debugger;
-    setValue(parseInt(e.target.value));
     var value = sortedArray[index]?.correct_option === parseInt(e.target.value);
     setState((prevState) => ({
       ...prevState,
@@ -178,7 +172,7 @@ const HomePage = () => {
                   style={{ marginRight: 10 }}
                   onClick={gotoPreviousQuestion}
                 >
-                  {Index != 0 ? "Back" : "Exit"}
+                  {Index !== 0 ? "Back" : "Exit"}
                 </Button>
                 <Button
                   variant="contained"

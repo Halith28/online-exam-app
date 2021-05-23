@@ -9,8 +9,6 @@ import {
   Typography,
   Paper,
   MenuItem,
-  InputLabel,
-  FormLabel,
   Select,
   FormHelperText,
   FormControl,
@@ -19,7 +17,6 @@ import { LocalStorageKeys } from "../../utils/constants";
 import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import { Link, useHistory } from "react-router-dom";
-import axios from "axios";
 import { AlertContext } from "../../contexts";
 import { AlertProps } from "../../utils/constants";
 import { Routes } from "../../router/routes";
@@ -148,11 +145,6 @@ const SignInPage = () => {
   console.log(state?.email?.length);
 
   const submitForm = () => {
-    debugger;
-    const params = {
-      email: state.email,
-      password: state.password,
-    };
     if (validation()) {
       //   if (!state?.error?.email && !state?.error?.password) {
       //     axios

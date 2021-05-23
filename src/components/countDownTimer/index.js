@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useHistory } from "react-router";
 import { Routes } from "../../router/routes";
 
@@ -20,18 +20,18 @@ const CountDown = ({ hours = 0, minutes = 0, seconds = 0, data, getTime }) => {
       //   history.push(Routes?.results);
     } else if (m === 0 && s === 0) {
       setTime([h - 1, 59, 59]);
-    } else if (s == 0) {
+    } else if (s === 0) {
       setTime([h, m - 1, 59]);
     } else {
       setTime([h, m, s - 1]);
     }
   };
 
-  const reset = () => {
-    setTime([parseInt(hours), parseInt(minutes), parseInt(seconds)]);
-    setPaused(false);
-    setOver(false);
-  };
+  //   const reset = () => {
+  //     setTime([parseInt(hours), parseInt(minutes), parseInt(seconds)]);
+  //     setPaused(false);
+  //     setOver(false);
+  //   };
 
   React.useEffect(() => {
     const timerID = setInterval(() => tick(), 1000);
@@ -39,8 +39,9 @@ const CountDown = ({ hours = 0, minutes = 0, seconds = 0, data, getTime }) => {
   });
 
   useEffect(() => {
-    getTime([h, m, s]);
-  }, [h, m, s]);
+    getTime([m, s]);
+    // eslint-disable-next-line
+  }, [m, s]);
 
   return (
     <div>

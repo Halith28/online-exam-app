@@ -54,7 +54,7 @@ const ResultPage = () => {
   const [incorrect, setInCorrect] = useState(0);
   const [score, setScore] = useState(0);
   const [skipped, setSkipped] = useState(0);
-  const [h, m, s] = history?.location?.timeTaken;
+  const [m, s] = history?.location?.timeTaken;
 
   useEffect(() => {
     var value = results?.filter((val) => val === true).length;
@@ -63,7 +63,7 @@ const ResultPage = () => {
     setInCorrect(((results?.length - value) / results?.length) * 100);
     setCorrect(100 - ((5 - value) / 5) * 100);
     console.log((results?.length - value) / results?.length);
-  }, []);
+  }, [results]);
   console.log(score);
   console.log(history?.location?.timeTaken);
 
