@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import {
   Grid,
   makeStyles,
@@ -8,14 +8,9 @@ import {
   Paper,
 } from "@material-ui/core";
 import { Link, useHistory } from "react-router-dom";
-import LoginNamePlate from "../../components/loginNamePlate";
-import axios from "axios";
-import { AlertContext } from "../../contexts";
-import { AlertProps } from "../../utils/constants";
-import Radio from "@material-ui/core/Radio";
-import RadioGroup from "@material-ui/core/RadioGroup";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import FormControl from "@material-ui/core/FormControl";
+// import axios from "axios";
+// import { AlertContext } from "../../contexts";
+// import { AlertProps } from "../../utils/constants";
 import { red } from "@material-ui/core/colors";
 import signUpPic from "../../assets/Frame1679.png";
 import { Routes } from "../../router/routes";
@@ -137,7 +132,7 @@ const SignUpPage = () => {
     email: "",
     error: {},
   });
-  const alert = useContext(AlertContext);
+  //   const alert = useContext(AlertContext);
 
   const handleChange1 = ({ target: { name, value } }) => {
     setState({ ...state, [name]: value });
@@ -145,95 +140,95 @@ const SignUpPage = () => {
 
   console.log(state);
 
-  const validation = () => {
-    if (state?.email?.length === 0) {
-      state.error = {
-        email:
-          state?.email?.length === 0 ||
-          /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(state.email) ===
-            false
-            ? true
-            : false,
-      };
-      setState({ ...state });
-      return true;
-    } else if (state?.email.length > 0) {
-      state.error = {
-        ...state.error,
-        email:
-          /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(state.email) ===
-          false
-            ? true
-            : false,
-      };
-      setState({ ...state });
-      return true;
-    } else {
-      state.error = {
-        email: false,
-      };
-      return true;
-    }
-  };
+  //   const validation = () => {
+  //     if (state?.email?.length === 0) {
+  //       state.error = {
+  //         email:
+  //           state?.email?.length === 0 ||
+  //           /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(state.email) ===
+  //             false
+  //             ? true
+  //             : false,
+  //       };
+  //       setState({ ...state });
+  //       return true;
+  //     } else if (state?.email.length > 0) {
+  //       state.error = {
+  //         ...state.error,
+  //         email:
+  //           /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(state.email) ===
+  //           false
+  //             ? true
+  //             : false,
+  //       };
+  //       setState({ ...state });
+  //       return true;
+  //     } else {
+  //       state.error = {
+  //         email: false,
+  //       };
+  //       return true;
+  //     }
+  //   };
 
-  const submitForm = () => {
-    const params = {
-      email: state.email,
-      username: state.email,
-      usertype: state.userType,
-    };
-    if (validation()) {
-      if (state?.email?.length === 0) {
-        alert.setSnack({
-          ...alert,
-          open: true,
-          severity: AlertProps.severity.error,
-          msg: "Please fill the required fields",
-          vertical: AlertProps.vertical.top,
-          horizontal: AlertProps.horizontal.center,
-        });
-      }
-      if (!state?.error?.email) {
-        axios
-          .post(`https://dev.prodkt.co/backend/Keycloak/Signup`, params)
-          .then((res) => {
-            if (res.status === 200) {
-              state.email = "";
-              alert.setSnack({
-                ...alert,
-                open: true,
-                severity: AlertProps.severity.success,
-                msg: "Please check your email to setup Password",
-                vertical: AlertProps.vertical.top,
-                horizontal: AlertProps.horizontal.center,
-              });
-              setTimeout(() => {
-                history.push("/login");
-              }, 5000);
-            } else {
-              alert.setSnack({
-                ...alert,
-                open: true,
-                severity: AlertProps.severity.error,
-                msg: "Please check your Email",
-                vertical: AlertProps.vertical.top,
-                horizontal: AlertProps.horizontal.center,
-              });
-            }
-          })
-          .catch((error) => {
-            alert.setSnack({
-              ...alert,
-              open: true,
-              severity: AlertProps.severity.error,
-              msg: "Email already exists",
-              vertical: AlertProps.vertical.top,
-              horizontal: AlertProps.horizontal.center,
-            });
-          });
-      }
-    }
-  };
+  //   const submitForm = () => {
+  //     const params = {
+  //       email: state.email,
+  //       username: state.email,
+  //       usertype: state.userType,
+  //     };
+  //     if (validation()) {
+  //       if (state?.email?.length === 0) {
+  //         alert.setSnack({
+  //           ...alert,
+  //           open: true,
+  //           severity: AlertProps.severity.error,
+  //           msg: "Please fill the required fields",
+  //           vertical: AlertProps.vertical.top,
+  //           horizontal: AlertProps.horizontal.center,
+  //         });
+  //       }
+  //       if (!state?.error?.email) {
+  //         axios
+  //           .post(`https://dev.prodkt.co/backend/Keycloak/Signup`, params)
+  //           .then((res) => {
+  //             if (res.status === 200) {
+  //               state.email = "";
+  //               alert.setSnack({
+  //                 ...alert,
+  //                 open: true,
+  //                 severity: AlertProps.severity.success,
+  //                 msg: "Please check your email to setup Password",
+  //                 vertical: AlertProps.vertical.top,
+  //                 horizontal: AlertProps.horizontal.center,
+  //               });
+  //               setTimeout(() => {
+  //                 history.push("/login");
+  //               }, 5000);
+  //             } else {
+  //               alert.setSnack({
+  //                 ...alert,
+  //                 open: true,
+  //                 severity: AlertProps.severity.error,
+  //                 msg: "Please check your Email",
+  //                 vertical: AlertProps.vertical.top,
+  //                 horizontal: AlertProps.horizontal.center,
+  //               });
+  //             }
+  //           })
+  //           .catch((error) => {
+  //             alert.setSnack({
+  //               ...alert,
+  //               open: true,
+  //               severity: AlertProps.severity.error,
+  //               msg: "Email already exists",
+  //               vertical: AlertProps.vertical.top,
+  //               horizontal: AlertProps.horizontal.center,
+  //             });
+  //           });
+  //       }
+  //     }
+  //   };
 
   // const handleChange = (event) => {
   //   setState({

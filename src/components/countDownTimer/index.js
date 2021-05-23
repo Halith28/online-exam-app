@@ -3,13 +3,13 @@ import { useHistory } from "react-router";
 import { Routes } from "../../router/routes";
 
 const CountDown = ({ hours = 0, minutes = 0, seconds = 0, data, getTime }) => {
-  const [paused, setPaused] = React.useState(false);
+  //   const [paused, setPaused] = React.useState(false);
   const [over, setOver] = React.useState(false);
   const [[h, m, s], setTime] = React.useState([hours, minutes, seconds]);
   const history = useHistory();
 
   const tick = () => {
-    if (paused || over) return;
+    // if (paused || over) return;
     if (h === 0 && m === 0 && s === 0) {
       setOver(true);
       history.push({
