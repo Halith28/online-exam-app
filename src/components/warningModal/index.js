@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import {
   Button,
   Grid,
-  TextField,
   Modal,
   Paper,
   IconButton,
@@ -12,9 +11,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import PropTypes from "prop-types";
 import { Close } from "@material-ui/icons";
 import warning from "../../assets/warning.jpg";
-import { GETATTRIBUTES, CHECKSERIALNO } from "../../graphql/queries";
-import axios from "axios";
-import clsx from "clsx";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -93,62 +89,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const menuItem = [
-  {
-    name: "Color",
-    value: [
-      {
-        item: "Green",
-      },
-      {
-        item: "Red",
-      },
-      {
-        item: "Yellow",
-      },
-      {
-        item: "Orange",
-      },
-    ],
-  },
-  {
-    name: "Type",
-    value: [
-      {
-        item: "CF Frame",
-      },
-      {
-        item: "MRF Tyres",
-      },
-    ],
-  },
-  {
-    name: "Size",
-    value: [
-      {
-        item: "Adults",
-      },
-      {
-        item: "Childrens",
-      },
-    ],
-  },
-];
-
 const WarningModal = (props) => {
   const classes = useStyles();
-  // const item = props?.selectedData?.attributes;
-  const [data, setData] = useState([]);
-  // const updatedRows = props?.data;
-  const [updatedRows, setUpdatedRows] = useState([]);
-  const [state, setState] = useState({
-    serial: "",
-    attributes: {},
-    error: false,
-    inventoryExists: false,
-    inventoryId: "",
-  });
-  // const [modalChange, setModalChange] = useState(false);
 
   return (
     <Modal
@@ -204,7 +146,6 @@ const WarningModal = (props) => {
                 fullWidth
                 // onChange={(e) => ModalChange(e, props?.selectedData, index)}
                 onClick={() => props?.continue()}
-                disabled={state?.error}
               >
                 Continue
               </Button>
