@@ -17,7 +17,7 @@ import { Routes } from "../../router/routes";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    // height: "100vh",
+    height: "100vh",
     backgroundColor: "#fff !important",
   },
   body: {
@@ -84,12 +84,18 @@ const useStyles = makeStyles((theme) => ({
     // marginBottom: "16px",
   },
   content: {
-    padding: 100,
+    padding: "0px 100px",
 
-    // height: "100%",
+    height: "100%",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
+    [theme.breakpoints.down("xs")]: {
+      padding: "0px 10px",
+    },
+    [theme.breakpoints.down("sm")]: {
+      padding: "0px 20px",
+    },
     // maxWidth: "600px",
     // height: "400px",
   },
@@ -241,7 +247,8 @@ const SignUpPage = () => {
     <Grid container direction="row" className={classes.root}>
       <Grid
         item
-        xs={6}
+        xs={0}
+        sm={6}
         style={{
           backgroundImage: `url(${signUpPic})`,
           backgroundSize: "cover",
@@ -250,7 +257,7 @@ const SignUpPage = () => {
       >
         {/* <img src={signUpPic} alt="SignUpPage" height="100%" width="100%" /> */}
       </Grid>
-      <Grid item xs={6}>
+      <Grid item xs={12} sm={6}>
         <div className={classes.content}>
           <Paper className={classes.body}>
             <Grid>

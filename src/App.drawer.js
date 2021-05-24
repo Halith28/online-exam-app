@@ -9,7 +9,7 @@
 import React from "react";
 import { DrawerContext } from "./contexts";
 import { Drawer, withStyles, Avatar } from "@material-ui/core";
-import { drawerProps } from "./utils";
+import { DrawerProps } from "./utils";
 
 const styles = (theme) => ({
   root: {
@@ -71,8 +71,8 @@ class AppDrawer extends React.Component {
     super(props);
     this.state = {
       open: false,
-      direction: drawerProps.direction.right,
-      variant: drawerProps.variant.temporary,
+      direction: DrawerProps.direction.right,
+      variant: DrawerProps.variant.temporary,
       isLarge: null,
       component: <>Hai</>,
     };

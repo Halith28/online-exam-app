@@ -16,10 +16,12 @@ import DataJson from "../../assets/sampleData.json";
 import { Routes } from "../../router/routes";
 import { useHistory } from "react-router";
 import CountDown from "../../components/countDownTimer";
+import WarningModal from "../../components/warningModal";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     padding: 25,
+    height: "100%",
   },
   timer: {
     display: "flex",
@@ -41,8 +43,10 @@ const useStyles = makeStyles((theme) => ({
 const HomePage = () => {
   const classes = useStyles();
   const history = useHistory();
+  const historyData = history?.location;
   const [Index, setIndex] = useState(0);
   const questionLimit = 5;
+  const [addModal, setAddModal] = useState(false);
   const [state, setState] = useState({
     results: [],
     checked: {
@@ -51,7 +55,7 @@ const HomePage = () => {
     notes: "",
   });
   const sortedArray = DataJson.filter(
-    (val, index) => val.category === "physics"
+    (val, index) => val.category === historyData?.examCategory
   );
   const [time, getTime] = useState();
 
@@ -59,12 +63,7 @@ const HomePage = () => {
     if (Index < 4) {
       setIndex(Index + 1);
     } else {
-      history.push({
-        pathname: Routes?.results,
-        results: state?.results,
-        notes: state?.notes,
-        timeTaken: time,
-      });
+      addModalOpen();
     }
   };
 
@@ -72,11 +71,7 @@ const HomePage = () => {
     if (Index > 0) {
       setIndex(Index - 1);
     } else {
-      setTimeout(() => {
-        localStorage.clear();
-        // localStorage.removeItem(LocalStorageKeys.authToken);
-        history.push(Routes?.signIn);
-      }, 1000);
+      addModalOpen();
     }
   };
 
@@ -99,10 +94,36 @@ const HomePage = () => {
     }
   };
 
+  const addModalOpen = () => {
+    setAddModal(true);
+  };
+
+  const addModalClose = () => {
+    setAddModal(false);
+  };
+  const Continue = () => {
+    if (Index > 0) {
+      history.push({
+        pathname: Routes?.results,
+        results: state?.results,
+        notes: state?.notes,
+        timeTaken: time,
+        examCategory: historyData?.examCategory,
+      });
+    } else {
+      setTimeout(() => {
+        localStorage.clear();
+        // localStorage.removeItem(LocalStorageKeys.authToken);
+        history.push(Routes?.signIn);
+      }, 1000);
+    }
+  };
+
   console.log(sortedArray);
   console.log(DataJson);
   console.log(state);
   console.log(time);
+  console.log(historyData?.examCategory);
   //   console.log(state.checked["checkbox_1"][0]);
   return (
     <Grid>
@@ -129,7 +150,7 @@ const HomePage = () => {
               <Typography style={{ marginBottom: 20 }}>
                 Question {Index + 1} of {questionLimit}
               </Typography>
-              <Typography variant="h6">
+              <Typography variant="h6" onClick={addModalOpen}>
                 {sortedArray[Index]?.question}
               </Typography>
               {/* <FormGroup column>
@@ -203,6 +224,13 @@ const HomePage = () => {
           </Grid>
         </Grid>
       </MainScreenComp>
+      <WarningModal
+        open={addModal}
+        handleClose={addModalClose}
+        header={"Add Product Inventory"}
+        isTitle
+        continue={Continue}
+      />
     </Grid>
   );
 };

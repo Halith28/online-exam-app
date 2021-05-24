@@ -10,7 +10,6 @@ import {
   Paper,
   MenuItem,
   Select,
-  FormHelperText,
   FormControl,
 } from "@material-ui/core";
 import { LocalStorageKeys } from "../../utils/constants";
@@ -35,8 +34,8 @@ const useStyles = makeStyles((theme) => ({
     // maxWidth: "500px",
     // width: "350px",
     padding: "50px",
-    margin: "20px",
-    // width: "100%",
+    // margin: "20px",
+    width: "100%",
     // boxShadow:
     //   "0px 2px 2px rgb(0 0 0 / 14%), 0px 3px 1px rgb(0 0 0 / 12%), 0px 1px 5px rgb(0 0 0 / 20%)",
     background: "#FFFFFF",
@@ -75,6 +74,13 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
+    padding: "0px 100px",
+    [theme.breakpoints.down("xs")]: {
+      padding: "0px 10px",
+    },
+    [theme.breakpoints.down("sm")]: {
+      padding: "0px 20px",
+    },
   },
   link: {
     textDecoration: "none",
@@ -119,6 +125,7 @@ const SignInPage = () => {
             ? true
             : false,
         password: state?.password?.length === 0 ? true : false,
+        examCategory: state?.examCategory ? false : true,
       };
       setState({ ...state });
       return false;
@@ -130,9 +137,10 @@ const SignInPage = () => {
           false
             ? true
             : false,
+        examCategory: state?.examCategory ? false : true,
       };
       setState({ ...state });
-      return true;
+      return state.error["email"] === false && state?.examCategory && true;
     } else {
       state.error = {
         email: false,
@@ -196,10 +204,14 @@ const SignInPage = () => {
       //         });
       //       });
       //   }
+      localStorage.setItem(LocalStorageKeys.authToken, "token");
       if (history?.location?.state?.from?.pathname) {
         history.push(history.location.state.from.pathname);
       } else {
-        history.push(Routes.home);
+        history.push({
+          pathname: Routes.home,
+          examCategory: state?.examCategory,
+        });
         localStorage.setItem("ExamCategory", state?.examCategory);
       }
     }
@@ -235,16 +247,27 @@ const SignInPage = () => {
     <Grid container direction="row" className={classes.root}>
       <Grid
         item
-        xs={6}
+        xs={0}
+        sm={6}
         style={{
           backgroundImage: `url(${signInPic})`,
           backgroundSize: "cover",
           overflow: "hidden",
         }}
       >
-        {/* <img src={signUpPic} alt="SignUpPage" height="100%" width="100%" /> */}
+        {/* <img
+          src={signInPic}
+          alt="SignUpPage"
+          //   height="100%"
+          //   width="100%"
+          style={{
+            objectFit: "cover",
+            backgroundSize: "cover",
+            overflow: "hidden",
+          }}
+        /> */}
       </Grid>
-      <Grid item xs={6}>
+      <Grid item xs={12} sm={6}>
         <div className={classes.content}>
           <Paper className={classes.body}>
             <Typography variant="h5" className={classes.loginTitle}>
@@ -312,7 +335,7 @@ const SignInPage = () => {
               value={state?.examCategory}
               variant="standard"
               className={classes.formControl}
-              error={state?.error?.insurance}
+              error={state?.error?.examCategory}
               fullWidth
             >
               {/* <InputLabel id="demo-simple-select-outlined-label">
@@ -324,15 +347,20 @@ const SignInPage = () => {
                 onChange={handleChange1}
                 inputProps={{ "aria-label": "Without label" }}
               >
-                <MenuItem value="">
-                  <em>None</em>
-                </MenuItem>
                 <MenuItem value={"physics"}>Physics</MenuItem>
-                <MenuItem value={"chemistry"}>Chemistry</MenuItem>
+                <MenuItem value={"sports"}>Sports</MenuItem>
+                <MenuItem value={"history"}>History</MenuItem>
+                <MenuItem value={"arts"}>Arts</MenuItem>
                 <MenuItem value={"science"}>Science</MenuItem>
               </Select>
-              {state?.error?.insurance && (
-                <FormHelperText>This is required!</FormHelperText>
+              {state?.error?.examCategory && (
+                <Typography
+                  component={"span"}
+                  variant="subtitle2"
+                  style={{ color: "red" }}
+                >
+                  Select anyone Category
+                </Typography>
               )}
             </FormControl>
             <Typography variant="subtitle2">

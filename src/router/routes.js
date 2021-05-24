@@ -8,7 +8,7 @@
 
 export const Routes = {
   //Auth routes
-  home: "/",
+  home: "/home",
   signUp: "/signUp",
   signIn: "/signIn",
   results: "/results",

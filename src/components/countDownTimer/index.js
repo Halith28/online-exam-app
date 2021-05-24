@@ -16,6 +16,7 @@ const CountDown = ({ hours = 0, minutes = 0, seconds = 0, data, getTime }) => {
         pathname: Routes?.results,
         results: data?.results,
         notes: data?.notes,
+        timeTaken: [m, s],
       });
       //   history.push(Routes?.results);
     } else if (m === 0 && s === 0) {

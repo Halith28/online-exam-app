@@ -12,6 +12,7 @@ import YouTubeIcon from "@material-ui/icons/YouTube";
 import InstagramIcon from "@material-ui/icons/Instagram";
 import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
 import logo from "../../assets/Frame1681.png";
+import { useHistory } from "react-router";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -53,6 +54,8 @@ const useStyles = makeStyles((theme) => ({
 
 const MainScreenComp = (props) => {
   const classes = useStyles();
+  const history = useHistory();
+
   return (
     <>
       <div className={classes.root}>
@@ -73,7 +76,7 @@ const MainScreenComp = (props) => {
               align="center"
               style={{ textTransform: "uppercase" }}
             >
-              Exam Category : Physics
+              Exam Category : {history?.location?.examCategory}
             </Typography>
             <IconButton
               edge="start"

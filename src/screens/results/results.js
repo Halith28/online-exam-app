@@ -5,6 +5,7 @@ import MainScreenComp from "../../components/mainScreenComp";
 import { Button, Grid, makeStyles, Typography } from "@material-ui/core";
 import { Routes } from "../../router/routes";
 import { useHistory } from "react-router";
+import { LocalStorageKeys } from "../../utils/constants";
 
 const useStyles = makeStyles((theme) => ({
   body: {
@@ -60,12 +61,25 @@ const ResultPage = () => {
     var value = results?.filter((val) => val === true).length;
     setScore(value * 2);
     setSkipped(((5 - results?.length) / 5) * 100);
-    setInCorrect(((results?.length - value) / results?.length) * 100);
+    setInCorrect(
+      results?.length === 0
+        ? 0
+        : ((results?.length - value) / results?.length) * 100
+    );
     setCorrect(100 - ((5 - value) / 5) * 100);
     console.log((results?.length - value) / results?.length);
   }, [results]);
+
+  const redirectToLogIn = () => {
+    localStorage.setItem(LocalStorageKeys.authToken, "");
+    history.push(Routes.signIn);
+  };
   console.log(score);
   console.log(history?.location?.timeTaken);
+  console.log(
+    results?.length === 0 ? 0 : ((results?.length - 0) / results?.length) * 100
+  );
+  console.log(results);
 
   return (
     <>
@@ -79,9 +93,11 @@ const ResultPage = () => {
               <Typography>
                 Time Taken:{" "}
                 <b>
-                  {`${(5 - m).toString().padStart(2, "0")}:${(60 - s)
-                    .toString()
-                    .padStart(2, "0")}`}
+                  {`${(4 - m).toString().padStart(2, "0")}:${
+                    s
+                      ? (60 - s).toString().padStart(2, "0")
+                      : s.toString().padStart(2, "0")
+                  }`}
                 </b>
               </Typography>
               <Typography variant="h4">{(score / 10) * 100}%</Typography>
@@ -145,7 +161,7 @@ const ResultPage = () => {
               <Button
                 variant="outlined"
                 className={classes.button}
-                onClick={() => history.push(Routes.signIn)}
+                onClick={() => redirectToLogIn()}
               >
                 Exit
               </Button>

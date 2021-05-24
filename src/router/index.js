@@ -16,19 +16,26 @@ import {
 import { Routes } from "./routes";
 
 import { Home, NotFound, Results, SignIn, SignUp } from "./../screens";
+import PrivateRoute from "./privateRouter";
 
 const RouterApp = (props) => {
   return (
     <Router>
       <Switch>
-        {/* form component list */}
-        <Route exact path={Routes.home} component={Home} />
+        {/* Home path */}
+        <PrivateRoute exact path={Routes.home}>
+          <Home />
+        </PrivateRoute>
         {/* Results Page */}
-        <Route exact path={Routes.results} component={Results} />
+        <PrivateRoute exact path={Routes.results}>
+          <Results />
+        </PrivateRoute>
         {/* Signup Page */}
         <Route exact path={Routes.signUp} component={SignUp} />
         {/* SignIn Page */}
         <Route exact path={Routes.signIn} component={SignIn} />
+        {/* Login path */}
+        <Route exact path="/" component={SignIn} />
 
         {/* For unknow/non-defined path */}
         <Route path="*" component={NotFound} />

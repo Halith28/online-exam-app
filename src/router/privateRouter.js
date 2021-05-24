@@ -11,17 +11,14 @@
 import React from "react";
 import { Redirect, Route } from "react-router-dom";
 import { Routes } from "./routes";
-import { Access } from "./access";
+// import { Access } from "./access";
+import { LocalStorageKeys } from "../utils/constants";
 import AppDrawer from "../App.drawer";
 
-const PrivateRoute = ({ children, ...rest }) => {
+const PrivateRoute = ({ children, location, ...rest }) => {
   const isAuthenticated = (router) => {
-    if (1) {
-      const _ = Access(1, router?.match?.path);
-      if (_ >= 0) {
-        return true;
-      }
-      return false;
+    if (localStorage.getItem(LocalStorageKeys.authToken)) {
+      return true;
     } else {
       return false;
     }
@@ -36,7 +33,7 @@ const PrivateRoute = ({ children, ...rest }) => {
         ) : (
           <Redirect
             to={{
-              pathname: Routes.login,
+              pathname: Routes.signIn,
               state: { from: _?.location },
             }}
           />
