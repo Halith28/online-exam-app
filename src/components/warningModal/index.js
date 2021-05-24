@@ -127,7 +127,7 @@ const WarningModal = (props) => {
             {props.isTitle}
             <div className={classes.modalBody}>
               <Typography variant="h3" align="center">
-                Warning !
+                Warning
               </Typography>
               <div style={{ margin: "20px 0px" }}>
                 <Typography variant="subtitle1" align="center">

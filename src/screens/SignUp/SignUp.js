@@ -46,6 +46,9 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "#2B7DF7",
     color: "white",
     borderRadius: "8.75px",
+    "&:hover": {
+      backgroundColor: "#2b7df7cc",
+    },
   },
   logIn: {
     textAlign: "center",
