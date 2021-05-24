@@ -19,7 +19,8 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
   },
   menuButton: {
-    marginRight: theme.spacing(2),
+    backgroundColor: "#EAEAEA",
+    borderRadius: "12px",
   },
   title: {
     flexGrow: 1,
@@ -86,6 +87,7 @@ const MainScreenComp = (props) => {
               className={classes.menuButton}
               color="inherit"
               aria-label="menu"
+              style={{ marginRight: 30 }}
             >
               <NotificationsIcon />
             </IconButton>

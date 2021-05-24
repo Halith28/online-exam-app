@@ -149,7 +149,7 @@ const ResultPage = () => {
 
             <Grid item xs={12} className={classes.scribbleGrid}>
               <Typography variant="h6">Your Scribble Notes:</Typography>
-              <Typography>
+              <Typography variant="p">
                 {history?.location?.notes ? (
                   history?.location?.notes
                 ) : (

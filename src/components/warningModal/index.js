@@ -91,6 +91,7 @@ const useStyles = makeStyles((theme) => ({
 
 const WarningModal = (props) => {
   const classes = useStyles();
+  console.log(props);
 
   return (
     <Modal

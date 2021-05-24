@@ -225,14 +225,16 @@ const HomePage = () => {
           </Grid>
         </Grid>
       </MainScreenComp>
-      <WarningModal
-        open={addModal}
-        handleClose={addModalClose}
-        header={"Add Product Inventory"}
-        isTitle
-        continue={Continue}
-        Index={Index}
-      />
+      {addModal && (
+        <WarningModal
+          open={addModal}
+          handleClose={addModalClose}
+          header={"Add Product Inventory"}
+          isTitle
+          continue={Continue}
+          Index={Index}
+        />
+      )}
     </Grid>
   );
 };
