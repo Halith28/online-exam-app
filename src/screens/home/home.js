@@ -23,6 +23,9 @@ const useStyles = makeStyles((theme) => ({
     padding: "15px 15px 30px 15px",
     height: "100%",
     overflowX: "hidden",
+    "& .MuiRadio-colorSecondary.Mui-checked": {
+      color: "#2B7DF7",
+    },
   },
   timer: {
     display: "flex",
@@ -151,7 +154,7 @@ const HomePage = () => {
               <Typography style={{ marginBottom: 20 }}>
                 Question {Index + 1} of {questionLimit}
               </Typography>
-              <Typography variant="h6" onClick={addModalOpen}>
+              <Typography variant="h6">
                 {sortedArray[Index]?.question}
               </Typography>
               {/* <FormGroup column>
