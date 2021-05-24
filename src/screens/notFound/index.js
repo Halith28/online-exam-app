@@ -8,7 +8,6 @@
 
 import React from "react";
 import { Grid, Typography, Link } from "@material-ui/core";
-import { withNavBars } from "../../HOCs";
 
 class NotFound extends React.Component {
   render() {
@@ -29,4 +28,4 @@ class NotFound extends React.Component {
   }
 }
 
-export default withNavBars(NotFound);
+export default NotFound;

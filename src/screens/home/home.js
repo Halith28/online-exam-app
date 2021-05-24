@@ -20,8 +20,9 @@ import WarningModal from "../../components/warningModal";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    padding: 25,
+    padding: "15px 15px 30px 15px",
     height: "100%",
+    overflowX: "hidden",
   },
   timer: {
     display: "flex",
@@ -230,6 +231,7 @@ const HomePage = () => {
         header={"Add Product Inventory"}
         isTitle
         continue={Continue}
+        Index={Index}
       />
     </Grid>
   );

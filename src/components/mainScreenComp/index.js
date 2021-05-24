@@ -46,9 +46,12 @@ const useStyles = makeStyles((theme) => ({
     display: "inline-flex",
     padding: 10,
     justifyContent: "flex-end",
+    alignItems: "center",
   },
   icons: {
     margin: "0px 10px",
+    backgroundColor: "white",
+    border: "0.895919px solid #E5E5E5",
   },
 }));
 
@@ -115,16 +118,16 @@ const MainScreenComp = (props) => {
           </Grid>
           <Grid item xs={6} className={classes.marketing}>
             <Avatar className={classes.icons}>
-              <FacebookIcon />
+              <FacebookIcon style={{ color: "#626262" }} />
             </Avatar>
             <Avatar className={classes.icons}>
-              <TwitterIcon />
+              <TwitterIcon style={{ color: "#626262" }} />
             </Avatar>
             <Avatar className={classes.icons}>
-              <YouTubeIcon />
+              <YouTubeIcon style={{ color: "#626262" }} />
             </Avatar>
             <Avatar className={classes.icons}>
-              <InstagramIcon />
+              <InstagramIcon style={{ color: "#626262" }} />
             </Avatar>
           </Grid>
         </Grid>

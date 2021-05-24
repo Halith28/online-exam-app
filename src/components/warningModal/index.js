@@ -130,7 +130,9 @@ const WarningModal = (props) => {
               </Typography>
               <div style={{ margin: "20px 0px" }}>
                 <Typography variant="subtitle1" align="center">
-                  Are you sure, you want to exit the exam?
+                  {props?.Index === 0
+                    ? "Are you sure, you want to exit the exam?"
+                    : "Are you sure, you want to submit the exam?"}
                 </Typography>
               </div>
             </div>
