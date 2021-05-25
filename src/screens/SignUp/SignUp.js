@@ -292,7 +292,7 @@ const SignUpPage = () => {
                 name="email"
                 variant="standard"
                 fullWidth
-                placeholder="Enter your official mail Id"
+                placeholder="Enter your Password"
                 onChange={handleChange1}
                 error={state?.error?.email ?? false}
                 helperText={
@@ -312,7 +312,7 @@ const SignUpPage = () => {
                 name="email"
                 variant="standard"
                 fullWidth
-                placeholder="Enter your official mail Id"
+                placeholder="ReEnter your Password"
                 onChange={handleChange1}
                 error={state?.error?.email ?? false}
                 helperText={

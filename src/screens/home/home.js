@@ -42,6 +42,26 @@ const useStyles = makeStyles((theme) => ({
   buttonGrid: {
     marginTop: 20,
   },
+  textField: {
+    boxShadow: "0px 2px 6px #1e20271a",
+    border: "2px solid #FFFFFF",
+    borderRadius: "13px",
+    opacity: 1,
+  },
+  textInput: {
+    "& .MuiOutlinedInput-root": {
+      "& fieldset": {
+        borderColor: "#7070703D",
+        border: "none",
+      },
+      "&:hover fieldset": {
+        borderColor: "#4BCD3E",
+      },
+      "&.Mui-focused fieldset": {
+        borderColor: "#4BCD3E",
+      },
+    },
+  },
 }));
 
 const HomePage = () => {
@@ -209,7 +229,9 @@ const HomePage = () => {
               </Grid>
             </Grid>
             <Grid item xs={6}>
-              <div className={classes.notePadSection}>
+              <div
+                className={`${classes.notePadSection} ${classes.textField} `}
+              >
                 <Grid style={{ padding: 10 }}>
                   <Typography>NotePad</Typography>
                 </Grid>
@@ -222,6 +244,8 @@ const HomePage = () => {
                   multiline
                   rows={13}
                   fullWidth
+                  disableunderline="true"
+                  className={classes.textInput}
                 />
               </div>
             </Grid>

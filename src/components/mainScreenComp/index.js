@@ -26,12 +26,14 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
   },
   body: {
-    height: "80%",
+    // height: "calc(100vh - 200px)",
+    height: "80vh",
+    marginTop: 67,
   },
   footer: {
-    position: "relative",
-    bottom: 0,
-    left: 0,
+    // position: "relative",
+    // bottom: 0,
+    // left: 0,
   },
   appBar: {
     color: "black",
@@ -53,6 +55,7 @@ const useStyles = makeStyles((theme) => ({
     margin: "0px 10px",
     backgroundColor: "white",
     border: "0.895919px solid #E5E5E5",
+    cursor: "pointer",
   },
 }));
 
@@ -63,7 +66,7 @@ const MainScreenComp = (props) => {
   return (
     <>
       <div className={classes.root}>
-        <AppBar position="static" className={classes.appBar}>
+        <AppBar position="fixed" className={classes.appBar}>
           <Toolbar classname={classes.toolBar}>
             <img src={logo} alt="logo" height="50px" width="40px" />
             <div>
@@ -107,7 +110,13 @@ const MainScreenComp = (props) => {
         <Grid container>
           <Grid item xs={6}>
             <div style={{ marginLeft: 20, display: "flex", padding: 10 }}>
-              <img src={logo} alt="logo" height="50px" width="40px" />
+              <img
+                src={logo}
+                alt="logo"
+                height="50px"
+                width="40px"
+                style={{ marginTop: 10 }}
+              />
               <div>
                 <Typography variant="h6" className={classes.title}>
                   Clinical

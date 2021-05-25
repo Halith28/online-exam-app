@@ -13,6 +13,7 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
     alignItems: "center",
     height: "100%",
+    padding: "15px 0px",
   },
   resultContent: {
     padding: 50,
@@ -55,7 +56,7 @@ const ResultPage = () => {
   const [incorrect, setInCorrect] = useState(0);
   const [score, setScore] = useState(0);
   const [skipped, setSkipped] = useState(0);
-  const [m, s] = history?.location?.timeTaken;
+  const [m, s] = history?.location?.timeTaken ?? ["", ""];
 
   useEffect(() => {
     var value = results?.filter((val) => val === true).length;

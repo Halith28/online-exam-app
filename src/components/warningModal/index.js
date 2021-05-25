@@ -53,8 +53,6 @@ const useStyles = makeStyles((theme) => ({
   },
   modalHeader: {
     fontSize: 18,
-    paddingBottom: 15,
-    paddingLeft: 20,
     // borderBottom: "1px solid #D4D4D4",
     display: "flex",
     justifyContent: "center",
