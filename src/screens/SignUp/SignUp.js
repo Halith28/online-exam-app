@@ -23,16 +23,10 @@ const useStyles = makeStyles((theme) => ({
   body: {
     padding: "50px",
     width: "100%",
-    // margin: "50px",
-    // boxShadow:
-    //   "0px 2px 2px rgb(0 0 0 / 14%), 0px 3px 1px rgb(0 0 0 / 12%), 0px 1px 5px rgb(0 0 0 / 20%)",
-    // boxShadow: "0 1px 2px 0 rgb(0 0 0 / 5%)",
-    // border: "1px solid rgba(0,40,100,.12)",
     background: "#FFFFFF",
     boxShadow: "0px 6px 60px rgba(0, 0, 0, 0.08)",
     borderRadius: "20px",
     "& .MuiFormControl-root": {
-      // marginTop: "16px",
       marginBottom: "16px",
     },
   },
@@ -57,19 +51,6 @@ const useStyles = makeStyles((theme) => ({
     marginTop: "20px",
   },
   passCode: {
-    // width: "100px",
-    // [theme.breakpoints.up("md")]: {
-    //   width: "80px",
-    // },
-    // [theme.breakpoints.up("lg")]: {
-    //   "& .MuiOutlinedInput-root": {
-    //     width: "70px",
-    //     height: "70px",
-    //   },
-    // },
-    // [theme.breakpoints.down("sm")]: {
-    //   width: "40px",
-    // },
     "& .MuiInputBase-input": {
       textAlign: "center",
     },
@@ -84,7 +65,6 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
     alignItems: "center",
     color: theme.palette.primary.main,
-    // marginBottom: "16px",
   },
   content: {
     padding: "0px 100px",
@@ -99,8 +79,6 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down("sm")]: {
       padding: "0px 20px",
     },
-    // maxWidth: "600px",
-    // height: "400px",
   },
   link: {
     textDecoration: "none",
@@ -110,7 +88,6 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    // width: "100%",
     "& .MuiFormGroup-root": {
       flexDirection: "row",
     },

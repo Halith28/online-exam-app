@@ -53,7 +53,6 @@ const useStyles = makeStyles((theme) => ({
   },
   modalHeader: {
     fontSize: 18,
-    // borderBottom: "1px solid #D4D4D4",
     display: "flex",
     justifyContent: "center",
   },
@@ -62,21 +61,12 @@ const useStyles = makeStyles((theme) => ({
     paddingRight: 30,
   },
   modalFooter: {
-    // borderTop: "1px solid #D4D4D4",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
     marginTop: 20,
     padding: 20,
   },
-  // closeButton: {
-  //   position: "absolute",
-  //   top: "122px",
-  //   right: "220px",
-  //   float: "right",
-  //   padding: 0,
-  //   backgroundColor: "white",
-  // },
   closeButton: {
     position: "relative",
     float: "right",
@@ -98,7 +88,6 @@ const WarningModal = (props) => {
       aria-labelledby="simple-modal-title"
       aria-describedby="simple-modal-description"
     >
-      {/* <div className={classes.root}> */}
       <Grid
         container
         justify="center"
@@ -113,12 +102,6 @@ const WarningModal = (props) => {
             <Close />
           </IconButton>
           <Paper className={classes.paper}>
-            {/* <IconButton
-              className={classes.closeButton}
-              onClick={props.handleClose}
-            >
-              <Close />
-            </IconButton> */}
             <div className={classes.modalHeader}>
               <img src={warning} alt="warning" height="100px" width="100px" />
             </div>
@@ -141,11 +124,8 @@ const WarningModal = (props) => {
                 color="primary"
                 style={{
                   textTransform: "capitalize",
-                  //   width: 80,
-                  //   marginRight: 24,
                 }}
                 fullWidth
-                // onChange={(e) => ModalChange(e, props?.selectedData, index)}
                 onClick={() => props?.continue()}
               >
                 Continue
@@ -154,7 +134,6 @@ const WarningModal = (props) => {
           </Paper>
         </Grid>
       </Grid>
-      {/* </div> */}
     </Modal>
   );
 };

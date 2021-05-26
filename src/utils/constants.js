@@ -1,8 +1,6 @@
 /**
  * @author Abdul halith
  * @email abd.halith994@gmail.com
- * @create date 2021-01-09
- * @modify date 2021-02-03
  * @desc Collection of constants
  */
 import React from "react";

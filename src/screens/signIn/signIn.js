@@ -21,6 +21,7 @@ import { AlertProps } from "../../utils/constants";
 import { Routes } from "../../router/routes";
 import signInPic from "../../assets/Frame1680.png";
 
+// SignIn page styles are mentioned here
 const useStyles = makeStyles((theme) => ({
   root: {
     height: "100vh",
@@ -31,19 +32,12 @@ const useStyles = makeStyles((theme) => ({
     margin: "20px",
   },
   body: {
-    // maxWidth: "500px",
-    // width: "350px",
     padding: "50px",
-    // margin: "20px",
     width: "100%",
-    // boxShadow:
-    //   "0px 2px 2px rgb(0 0 0 / 14%), 0px 3px 1px rgb(0 0 0 / 12%), 0px 1px 5px rgb(0 0 0 / 20%)",
     background: "#FFFFFF",
     boxShadow: "0px 6px 60px rgba(0, 0, 0, 0.08)",
     borderRadius: "20px",
     "& .MuiFormControl-root": {
-      //   padding: "15px 0px",
-      // marginTop: "16px",
       marginBottom: "16px",
     },
   },
@@ -71,8 +65,6 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   content: {
-    // height: "400px",
-    // maxWidth: "400px",
     height: "100%",
     display: "flex",
     alignItems: "center",
@@ -106,9 +98,9 @@ const SignInPage = () => {
   });
   const [showPassword, setShowPassword] = useState(false);
   const handleClickShowPassword = () => setShowPassword(!showPassword);
-  // const handleMouseDownPassword = () => setShowPassword(!showPassword);
   const alert = useContext(AlertContext);
 
+  // validation to check inputs are valid or not
   const validation = () => {
     if (state?.email?.length === 0 && state?.password?.length === 0) {
       alert.setSnack({
@@ -153,60 +145,11 @@ const SignInPage = () => {
     }
   };
 
-  console.log(state?.email?.length);
-
+  // when click signin button, this will do validation by calling validation function.
+  // If validation function return true, specified URL will be redirected.
+  // If validation function returns false, it will not execute anything and home page also will not be redirected.
   const submitForm = () => {
     if (validation()) {
-      //   if (!state?.error?.email && !state?.error?.password) {
-      //     axios
-      //       .post(`https://dev.prodkt.co/backend/Keycloak/Signin`, params)
-      //       .then((res) => {
-      //         debugger;
-      //         if (res.status === 200) {
-      //           state.email = "";
-      //           state.password = "";
-      //           state.isLoggingIn = true;
-      //           setTimeout(() => {
-      //             localStorage.setItem(LocalStorageKeys.authToken, "token");
-      //             localStorage.setItem(
-      //               "BusinessProfileID",
-      //               res?.data?.userdetails?.ID
-      //             );
-      //             localStorage.setItem(
-      //               "BusinessPartnerID",
-      //               res?.data?.userdetails?.BusinessPartnerID
-      //             );
-      //             // history.push("/home");
-      //             if (history?.location?.state?.from?.pathname) {
-      //               history.push(history.location.state.from.pathname);
-      //             } else {
-      //               history.push(Routes.home);
-      //             }
-      //           }, 1000);
-      //           setState({ ...state });
-      //         } else {
-      //           alert.setSnack({
-      //             ...alert,
-      //             open: true,
-      //             severity: AlertProps.severity.error,
-      //             msg: "Please fill the required fields",
-      //             vertical: AlertProps.vertical.top,
-      //             horizontal: AlertProps.horizontal.center,
-      //           });
-      //         }
-      //       })
-      //       .catch((error) => {
-      //         console.log({ error });
-      //         alert.setSnack({
-      //           ...alert,
-      //           open: true,
-      //           severity: AlertProps.severity.error,
-      //           msg: "Invalid Email or Password",
-      //           vertical: AlertProps.vertical.top,
-      //           horizontal: AlertProps.horizontal.center,
-      //         });
-      //       });
-      //   }
       localStorage.setItem(LocalStorageKeys.authToken, "token");
       if (history?.location?.state?.from?.pathname) {
         history.push(history.location.state.from.pathname);
@@ -220,7 +163,9 @@ const SignInPage = () => {
     }
   };
 
-  const handleChange1 = (event) => {
+  //handleChange function is to handle input changes in TextField elements
+  // input chamges will be stored in state by using setState function.
+  const handleChange = (event) => {
     setState({
       ...state,
       [event.target.name]: event.target.value,
@@ -228,14 +173,9 @@ const SignInPage = () => {
     });
   };
 
-  //   const handleChange2 = (event) => {
-  //     setState({
-  //       ...state,
-  //       password: event.target.value,
-  //       error: { ...state.error, password: false },
-  //     });
-  //   };
-
+  // Whenever history changes, this useEffect will execute its inside functions
+  // when user already logged in, if try to goback to signin page manually
+  // it will redirect to home page automatically. else it will redirect to signin page.
   useEffect(() => {
     if (localStorage.getItem(LocalStorageKeys.authToken)) {
       history.push(Routes.home);
@@ -243,8 +183,6 @@ const SignInPage = () => {
       history.push(Routes.signIn);
     }
   }, [history]);
-
-  console.log(state);
 
   return (
     <Grid container direction="row" className={classes.root}>
@@ -257,19 +195,7 @@ const SignInPage = () => {
           backgroundSize: "cover",
           overflow: "hidden",
         }}
-      >
-        {/* <img
-          src={signInPic}
-          alt="SignUpPage"
-          //   height="100%"
-          //   width="100%"
-          style={{
-            objectFit: "cover",
-            backgroundSize: "cover",
-            overflow: "hidden",
-          }}
-        /> */}
-      </Grid>
+      ></Grid>
       <Grid item xs={12} sm={6}>
         <div className={classes.content}>
           <Paper className={classes.body}>
@@ -283,7 +209,7 @@ const SignInPage = () => {
               color="primary"
               fullWidth
               placeholder="Email Address"
-              onChange={handleChange1}
+              onChange={handleChange}
               error={state?.error?.email ?? false}
               helperText={
                 state?.error?.email && (
@@ -303,7 +229,7 @@ const SignInPage = () => {
               variant="standard"
               fullWidth
               placeholder="Password"
-              onChange={handleChange1}
+              onChange={handleChange}
               type={showPassword ? "text" : "password"}
               error={state?.error?.password ?? false}
               helperText={
@@ -323,7 +249,6 @@ const SignInPage = () => {
                     <IconButton
                       aria-label="toggle password visibility"
                       onClick={handleClickShowPassword}
-                      // onMouseOver={handleMouseDownPassword}
                     >
                       {showPassword ? <Visibility /> : <VisibilityOff />}
                     </IconButton>
@@ -341,13 +266,10 @@ const SignInPage = () => {
               error={state?.error?.examCategory}
               fullWidth
             >
-              {/* <InputLabel id="demo-simple-select-outlined-label">
-                Exam Category
-              </InputLabel> */}
               <Select
                 name="examCategory"
-                value={state?.insurance}
-                onChange={handleChange1}
+                value={state?.examCategory}
+                onChange={handleChange}
                 inputProps={{ "aria-label": "Without label" }}
               >
                 <MenuItem value={"physics"}>Physics</MenuItem>
@@ -376,22 +298,11 @@ const SignInPage = () => {
                 className={classes.button}
                 variant="contained"
                 onClick={() => submitForm()}
-                // onClick={() => history.push(Routes.home)}
                 fullWidth
               >
                 {`${state.isLoggingIn ? "Logging In..." : "Log In"}`}
               </Button>
             </Grid>
-            {/* <Grid className={classes.buttonGrid}>
-              <Button
-                className={classes.button}
-                variant="contained"
-                color="primary"
-                onClick={() => submitForm()}
-              >
-                {`${state.isLoggingIn ? "Logging In..." : "Log In"}`}
-              </Button>
-            </Grid> */}
             <Typography variant="subtitle2" className={classes.signUp}>
               Don't have an account?{" "}
               <Link className={classes.link} to="/signup">

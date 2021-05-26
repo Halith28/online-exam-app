@@ -1,8 +1,6 @@
 /**
  * @author Abdul halith
  * @email abd.halith994@gmail.com
- * @create date 2020-11-27
- * @modify date 2021-01-25
  * @desc withAllContexts HOC will send all the necessary Context such as AlertContext,
  * DialogContext, BackdropContext and DrawerContext as a prop.
  */

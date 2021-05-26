@@ -1,8 +1,6 @@
 /**
  * @author Abdul halith
  * @email abd.halith994@gmail.com
- * @create date 2021-01-25
- * @modify date 2021-01-25
  * @desc Top Navigation bar parent
  */
 

@@ -7,6 +7,7 @@ import { Routes } from "../../router/routes";
 import { useHistory } from "react-router";
 import { LocalStorageKeys } from "../../utils/constants";
 
+// Result page styling are mentioned here
 const useStyles = makeStyles((theme) => ({
   body: {
     display: "flex",
@@ -58,6 +59,8 @@ const ResultPage = () => {
   const [skipped, setSkipped] = useState(0);
   const [m, s] = history?.location?.timeTaken ?? ["", ""];
 
+  // when results state change,this effect will be executed.
+  // in this effect, we will set score, correct, wrong, skipped questions.
   useEffect(() => {
     var value = results?.filter((val) => val === true).length;
     setScore(value * 2);
@@ -71,16 +74,11 @@ const ResultPage = () => {
     console.log((results?.length - value) / results?.length);
   }, [results]);
 
+  // this function will redirect to login when we click exit button in results page
   const redirectToLogIn = () => {
     localStorage.setItem(LocalStorageKeys.authToken, "");
     history.push(Routes.signIn);
   };
-  console.log(score);
-  console.log(history?.location?.timeTaken);
-  console.log(
-    results?.length === 0 ? 0 : ((results?.length - 0) / results?.length) * 100
-  );
-  console.log(results);
 
   return (
     <>

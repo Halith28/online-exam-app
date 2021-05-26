@@ -79,7 +79,7 @@ const HomePage = () => {
     notes: "",
   });
   const sortedArray = DataJson.filter(
-    (val, index) => val.category === historyData?.examCategory
+    (val) => val.category === historyData?.examCategory
   );
   const [time, getTime] = useState();
 
@@ -137,24 +137,16 @@ const HomePage = () => {
     } else {
       setTimeout(() => {
         localStorage.clear();
-        // localStorage.removeItem(LocalStorageKeys.authToken);
         history.push(Routes?.signIn);
       }, 1000);
     }
   };
 
-  console.log(sortedArray);
-  console.log(DataJson);
-  console.log(state);
-  console.log(time);
-  console.log(historyData?.examCategory);
-  //   console.log(state.checked["checkbox_1"][0]);
   return (
     <Grid>
       <MainScreenComp>
         <Grid container className={classes.root}>
           <Grid item xs={12} className={classes.timer}>
-            {/* <Typography>04:59</Typography> */}
             <CountDown
               hours={0}
               minutes={5}
@@ -177,22 +169,7 @@ const HomePage = () => {
               <Typography variant="h6">
                 {sortedArray[Index]?.question}
               </Typography>
-              {/* <FormGroup column>
-                {sortedArray[Index]?.options.map((item, index) => (
-                  <FormControlLabel
-                    key={index}
-                    control={
-                      <Checkbox
-                        // checked={state?.checked["checkbox_0"][index]}
-                        onChange={(e) => handleChange(e, item?.id, Index)}
-                        name={`checkbox_${Index}`}
-                        color="primary"
-                      />
-                    }
-                    label={item?.value}
-                  />
-                ))}
-              </FormGroup> */}
+
               <FormControl component="fieldset">
                 <RadioGroup
                   aria-label="options"
@@ -208,7 +185,6 @@ const HomePage = () => {
                     />
                   ))}
                 </RadioGroup>
-                {/* <FormLabel component="legend">Gender</FormLabel> */}
               </FormControl>
               <Grid className={classes.buttonGrid}>
                 <Button
