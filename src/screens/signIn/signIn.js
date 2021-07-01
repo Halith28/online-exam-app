@@ -194,6 +194,7 @@ const SignInPage = () => {
           backgroundImage: `url(${signInPic})`,
           backgroundSize: "cover",
           overflow: "hidden",
+          backgroundPosition: "center",
         }}
       ></Grid>
       <Grid item xs={12} sm={6}>

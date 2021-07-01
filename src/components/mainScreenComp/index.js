@@ -148,9 +148,7 @@ const MainScreenComp = (props) => {
           <Typography variant="caption" style={{ margin: "0px 10px" }}>
             {"|"}
           </Typography>
-          <Typography variant="caption">
-            Powered by Quinoid Business Solutions
-          </Typography>
+          <Typography variant="caption">Powered by Abdul Halith</Typography>
         </Grid>
       </Card>
     </>

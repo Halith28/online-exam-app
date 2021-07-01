@@ -232,6 +232,7 @@ const SignUpPage = () => {
         style={{
           backgroundImage: `url(${signUpPic})`,
           backgroundSize: "cover",
+          backgroundPosition: "center",
           overflow: "hidden",
         }}
       >
